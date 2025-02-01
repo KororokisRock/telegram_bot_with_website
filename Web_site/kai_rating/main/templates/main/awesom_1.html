@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>awesome.</title>
+    <link rel="stylesheet" href="{% static 'main/formstyle.css' %}">
+    <style>
+        button{
+            border: 0;
+            background-color: rgba(0, 0, 0, 0);
+            cursor: pointer;
+            transition: text-shadow 0.3s;
+            color: #ffffff;
+}
+
+        button:hover {
+            text-shadow: 0 0 15px #ffffff;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="">
+        <a class="nav-a active logo" href="">awesome.</a>
+        <a class="nav-a" href="">Мои ответы</a>
+        {% if is_log%}<a class="nav-a" href="">Аккаунт</a>
+        {%else%}<a class="ss" href="{%url 'login' %}">Войти</a>{%endif%}
+
+        <a href="#" class="icon" id="menu">&#9776</a>
+    </nav>
+
+
+    <main class="show fade-in">
+        <div class="{%if not is_admin%}admin hidden{%else%}{%endif%}">
+            <div class="container question-table">
+                <h1>Все вопросы</h1>
+                {%for q, u, i in q_tab%}
+                    <section class="container">
+                        
+                        <div class="people-time">
+                            <div class="people">
+                                <!-- <img class="people-img" src="/"> -->
+                                <p class="people-name">{{u}}</p>
+                            </div>
+                            <form  action="" method="post">
+                                {% csrf_token %}
+                                <button class="delete-btn" name="op" value="{{i}} del quest q_id {{name}}" type="submit" >Удалить</button></form>
+                        </div>
+
+                        <div class="question">
+                            <p class="question-text">{{q}}
+                            </p>
+                        </div>
+                        
+                    </section>
+                {%endfor%}
+   
+            </div>
+
+            <div class="container user-table" style="float:left;">
+                <h1>Все пользователи</h1>
+                <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">    </th>
+                        <th scope="col">    </th>
+                        <th scope="col">    </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {%for i, tg, n,p,ad,r in u_tab%}
+                      <tr>
+                        <th scope="row">{{n}}</th>
+                        <td>{{r}}</td>
+                        <form  action="" method="post"><td class="rate">
+                            {% csrf_token %}
+                            <td class="rate"><button  name="op" value="{{i}} rate + {{name}}" type="submit"  style="font-size: 40px;">+</button></td>
+    
+                            <td class="rate"><button  name="op" value="{{i}} rate - {{name}}" type="submit" style="font-size: 40px;" >-</button></h3></td>
+
+                            <td class="rate"><button  name="op" value="{{i}} adm {{name}}" type="submit"  >сделать админом</button></td>
+
+                            <td class="rate"><button  name="op" value="{{i}} del users id {{name}}" type="submit"  >удалить</button></td></form>
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+ 
+                
+            </div>
+        </div>
+
+
+
+
+
+        <section class="{%if is_admin%}admin hidden{%else%}main-header{%endif%}">
+            <h1 class="main-word">Задавай, учись,<br> помогай!</h1>
+            <img class="main-picture" src='{% static "main/src/mainpic.png" %}' alt="">
+        </section>
+    </main>
+
+
+
+
+    
+    <main class="">
+    {% for q,a,i in tup%}
+        
+            
+        <div style="border: 1px solid rgb(0, 121, 162);border-radius: 16px;margin: 10px;padding: 15px;">
+            <section class="container_">
+                <div class="question">
+                    <h1 class="question-name">Вопрос.</h1>
+                    <h2 class="question-text">{{q}}
+                    </h2>
+                </div>
+
+            </section>
+            <section class="container answer">
+                <div class="answer-tittle-delete-rating-container">
+                    <h1>Ответ:</h1>
+                    <div class="rating-delete-container">
+                        <!--<div class="rateing">
+                            1 <img class="rate-btn like" src="/src/like.png" alt="like">
+                            3 <img class="rate-btn dislike" src="/src/dislike.png" alt="dislike">
+                        </div>-->
+                        <form  action="" method="post">
+                            {% csrf_token %}
+                            <button class="delete-btn" name="op" value="{{i}} del answer ans_id {{name}}" type="submit" >Удалить</button></form>
+                    </div>
+                </div>
+
+                <h2 class="answer-text">{{a}}</h2>
+            </section>
+        </div>
+        
+    {%endfor%}
+    </main>
+
+
+
+    <main class="">
+        <section class="container">
+            <div class="user-info">
+                <div class="user-img"><img src="" alt=""></div>
+                <div class="user-text-info">
+                    <p class="people-name">{{name}}</p>
+                </div>
+            </div>
+            <div class="user-rating">
+                <p class="question-quantity">Вопросов задано: {{q_count}}</p>
+                <p class="answer-quantity">Дано ответов: {{a_count}}</p>
+                <p class="rating">Очки рейтинга: {{rating}}</p>
+                <p class="rating-place">Место в общем рейтинге: {{place}}</p>
+            </div>
+            <form action="" method="get">{% csrf_token %}
+                <button style="border: 0;background-color: rgba(0, 0, 0, 0);" name = "username" value="anon" type="submit"><p class="logout">Выйти из аккаунта</p></button>
+            </form>
+        </section>
+    </main>
+    <p style="color: red;bottom: 0%;position:absolute;right: 50%;translate: 50%;margin-bottom: 1.5%;">{{mas}}</p>
+
+
+
+
+    <script src='{% static "main/awesom.js" %}'></script>
+    <footer></footer>
+</body>
+
+</html>

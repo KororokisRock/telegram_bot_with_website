@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма</title>
+    <link rel="stylesheet" href="{% static 'accounts/login.css' %}">
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Вход</h2>
+        <form action="{%url 'home'%}" method="post">{% csrf_token %}
+            <label for="username">Логин:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <input type="submit" value="Войти">
+
+            <a href="https://web.telegram.org/k/#@Answer_Question_KAI_bot"  target="_blank"><p>Нет аккаунта? Регистрируйся в ТГ!</p></a>
+        </form>
+    </div>
+
+</body>
+
+</html>

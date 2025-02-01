@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма</title>
+    <link rel="stylesheet" href="{% static 'accounts/registr.css' %}">
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Регистрация</h2>
+        <form action="" method="post">{% csrf_token %}
+            <center><p style="color: azure;">Пароль должен быть длинно не менше 6 символов и содержать цифры, буквы в разных регистрах</p></center>
+            <label for="username">Логин:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Подтвердите пароль:</label><br> 
+            <input type="password" id="confirm-password" name="confirm-password" required><br><br> 
+
+            <input type="submit" value="Войти">
+            {% if not flag_1%}
+                <center><p style="color: red;">пароли не совпадают.</p></center>
+            {%endif%}
+            {% if not flag_2%}
+                <center><p style="color: red;">пароль слишком простой</p></center>
+            {%endif%}
+        </form>
+    </div>
+
+</body>
+
+</html>

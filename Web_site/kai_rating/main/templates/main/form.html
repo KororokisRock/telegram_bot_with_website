@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>awesome. Вход</title>
+    <link rel="stylesheet" href="/formstyle.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <h2 class="form-name">Вход</h2>
+        <form action="/login" method="post">
+            <label for="username">Логин:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Подтвердите пароль:</label><br> 
+            <input type="password" id="confirm-password" name="confirm-password" required><br><br> 
+
+            <input type="submit" value="Войти">
+        </form>
+    </div>
+
+</body>
+
+</html>
